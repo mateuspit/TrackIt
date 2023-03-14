@@ -1,18 +1,20 @@
 import styled from "styled-components";
 import fullLogo from "../../assets/images/logo-completa.svg"
 
-export default function LoginPage() {
+export default function SignInPage() {
     return (
         <ContainerIphone8>
             <Logo src={fullLogo} alt="Logo" />
             <FormContainer>
                 <StandardInput required type="email" placeholder="email" />
                 <StandardInput required type="password" placeholder="senha" />
+                <StandardInput required type="text" placeholder="nome" />
+                <StandardInput required placeholder="foto" />
                 <LoginSignInButton type="submit">
-                    Entrar
+                    Cadastrar
                 </LoginSignInButton>
                 <LoginPageFooter>
-                    Não tem uma conta? Cadastre-se!
+                    Já tem uma conta? Faça login!
                 </LoginPageFooter>
             </FormContainer>
         </ContainerIphone8>
