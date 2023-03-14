@@ -1,7 +1,9 @@
+import LoginPage from "./pages/LoginPage/LoginPage";
+
 export default function App() {
   return (
     <div className="App">
-      <h1>brasil sil sil</h1>
+      <LoginPage />      
     </div>
   );
 }
