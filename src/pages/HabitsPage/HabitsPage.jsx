@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import userImg from "../../assets/images/pongebob.png"
+import {BiTrash} from "react-icons/bi"
 
 export default function HabitsPage() {
     return (
@@ -60,6 +61,115 @@ export default function HabitsPage() {
 
                 </ContainerNewHabitForm>
 
+                <ContainerHabits>
+                    <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
+                    <ContainerDaysChoise>
+                        <TrashDiv><BiTrash size={20}/></TrashDiv>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="S" id="Monday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="T" id="Tuesday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="Q" id="Wednesday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="Q" id="Thursday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="S" id="Friday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="S" id="Saturday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                    </ContainerDaysChoise>
+                </ContainerHabits>
+
+                <ContainerHabits>
+                    <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
+                    <ContainerDaysChoise>
+                        <TrashDiv><BiTrash size={20}/></TrashDiv>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="S" id="Monday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="T" id="Tuesday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="Q" id="Wednesday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="Q" id="Thursday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="S" id="Friday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="S" id="Saturday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                    </ContainerDaysChoise>
+                </ContainerHabits>
+
+                <ContainerHabits>
+                    <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
+                    <ContainerDaysChoise>
+                        <TrashDiv><BiTrash size={20}/></TrashDiv>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="S" id="Monday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="T" id="Tuesday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="Q" id="Wednesday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="Q" id="Thursday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled checked letter="S" id="Friday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                        <CheckBoxContainer>
+                            <DayCheckBox disabled letter="S" id="Saturday" type="checkbox" />
+                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
+                        </CheckBoxContainer>
+                    </ContainerDaysChoise>
+                </ContainerHabits>
+
+
+
+
+
                 <NoHabitsText>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabitsText>
@@ -76,6 +186,31 @@ export default function HabitsPage() {
         </>
     );
 }
+
+const TrashDiv = styled.div`
+    position: absolute;
+    bottom: 45px;
+    right: 10px;
+`;
+
+const HabitTitle = styled.h1`
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;
+    color: #666666;
+    margin-left: 19px;
+    margin-top: 13px;
+`;
+
+const ContainerHabits = styled.div`
+    width: 340px;
+    height: 91px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    margin-top: 10px;
+`;
 
 const SaveNewHabitButton = styled.button`
     width: 84px;
@@ -221,6 +356,7 @@ const DayCheckBox = styled.input`
 `;
 
 const ContainerDaysChoise = styled.div`
+    position: relative;
     display: flex;
     margin-left: 19px;
     margin-top: 8px;
@@ -249,13 +385,14 @@ const StandardInput = styled.input`
 `;
 
 const ContainerNewHabitForm = styled.form`
+    display: none;
     width: 340px;
     height: 180px;
     background: #FFFFFF;
     border-radius: 5px;
     margin-left: 17px;
     margin-right: 18px;
-    margin-top: 22px;
+    margin-top: 10px;
 `;
 
 const CircularProgressBar = styled.div`
@@ -292,14 +429,15 @@ const FooterButtons = styled.p`
 const HabitsPageFooter = styled.div`
     position: relative;
     width: 100%;
-    margin-left: 36px;
-    margin-right: 31px;
+    padding-left: 36px;
+    padding-right: 31px;
     margin-top: 22px;
     display: flex;
     justify-content: space-between;
 `;
 
 const NoHabitsText = styled.div`
+    display: none;
     margin-left: 17px;
     margin-right: 20px;
     margin-top: 28px;
@@ -316,6 +454,7 @@ const HabitsHeader = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 22px;
+    margin-bottom: 10px;
 `;
 
 const NewHabitButton = styled.button`
