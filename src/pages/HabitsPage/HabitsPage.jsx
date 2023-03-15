@@ -18,14 +18,81 @@ export default function HabitsPage() {
                     <HabitsTitle>Meus hábitos</HabitsTitle>
                     <NewHabitButton>+</NewHabitButton>
                 </HabitsHeader>
+                <NoHabitsText>
+                    Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                </NoHabitsText>
             </ContainerIphone8>
-            <FooterPageDesktop />
+            <FooterPageDesktop>
+                <ContainerIphone8>
+                    <HabitsPageFooter>
+                        <FooterButtons>Hábitos</FooterButtons>
+                        <FooterButtons>Histórico</FooterButtons>
+                        <CircularProgressBar>Hoje</CircularProgressBar>
+                    </HabitsPageFooter>
+                </ContainerIphone8>
+            </FooterPageDesktop>
         </>
     );
 }
 
-const HabitsHeader = styled.div`
+const CircularProgressBar = styled.div`
+    bottom: -10px;
+    left: 142px;
+    position: absolute;
+    z-index: 2;
+    width: 91px;
+    height: 91px;
+    border-radius: 50%;
+    background: #52B6FF;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+`;
+
+const FooterButtons = styled.p`
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    text-align: center;
+    color: #52B6FF;
+`;
+
+const HabitsPageFooter = styled.div`
+    position: relative;
+    width: 100%;
+    margin-left: 36px;
+    margin-right: 31px;
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+`;
+
+const NoHabitsText = styled.div`
+    margin-left: 17px;
+    margin-right: 20px;
+    margin-top: 28px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #666666;    
+`;
+
+const HabitsHeader = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 22px;
 `;
 
 const NewHabitButton = styled.button`
@@ -43,6 +110,8 @@ const NewHabitButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-bottom: 5px;
+    margin-right: 18px;
 `;
 
 const HabitsTitle = styled.h1`
@@ -101,12 +170,12 @@ const FooterPageDesktop = styled.footer`
 `;
 
 const ContainerIphone8 = styled.div`
-    width: 100%;
+    width: 375px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #E5E5E5;
-    /* margin: auto; */
+    /* background-color: #E5E5E5; */
+    margin: auto;
     /* margin-top: 68px; */
 `;
