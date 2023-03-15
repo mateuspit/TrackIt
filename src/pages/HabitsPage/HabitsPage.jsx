@@ -1,18 +1,14 @@
 import styled from "styled-components";
-import { createGlobalStyle } from "styled-components";
-import userImg from "../../assets/images/pongebob.png"
-import {BiTrash} from "react-icons/bi"
+import { BiTrash } from "react-icons/bi"
+import HeaderHomeUser from "../../components/HeaderHomeUser";
+import FooterHabits from "../../components/FooterHabits";
 
 export default function HabitsPage() {
     return (
         <>
-            <ContainerHabitsPage />
-            <HeaderPageDesktop />
 
-            <DesktopHomePage>
-                TrackIt
-            </DesktopHomePage>
-            <DesktopImg src={userImg} alt="User img" />
+            <HeaderHomeUser />
+
 
             <ContainerIphone8>
                 <HabitsHeader>
@@ -64,7 +60,7 @@ export default function HabitsPage() {
                 <ContainerHabits>
                     <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
                     <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20}/></TrashDiv>
+                        <TrashDiv><BiTrash size={20} /></TrashDiv>
                         <CheckBoxContainer>
                             <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
@@ -99,7 +95,7 @@ export default function HabitsPage() {
                 <ContainerHabits>
                     <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
                     <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20}/></TrashDiv>
+                        <TrashDiv><BiTrash size={20} /></TrashDiv>
                         <CheckBoxContainer>
                             <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
@@ -134,7 +130,7 @@ export default function HabitsPage() {
                 <ContainerHabits>
                     <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
                     <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20}/></TrashDiv>
+                        <TrashDiv><BiTrash size={20} /></TrashDiv>
                         <CheckBoxContainer>
                             <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
@@ -174,15 +170,9 @@ export default function HabitsPage() {
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </NoHabitsText>
             </ContainerIphone8>
-            <FooterPageDesktop>
-                <ContainerIphone8>
-                    <HabitsPageFooter>
-                        <FooterButtons>Hábitos</FooterButtons>
-                        <FooterButtons>Histórico</FooterButtons>
-                        <CircularProgressBar>Hoje</CircularProgressBar>
-                    </HabitsPageFooter>
-                </ContainerIphone8>
-            </FooterPageDesktop>
+            
+            <FooterHabits />
+            
         </>
     );
 }
@@ -395,46 +385,7 @@ const ContainerNewHabitForm = styled.form`
     margin-top: 10px;
 `;
 
-const CircularProgressBar = styled.div`
-    bottom: -10px;
-    left: 142px;
-    position: absolute;
-    z-index: 2;
-    width: 91px;
-    height: 91px;
-    border-radius: 50%;
-    background: #52B6FF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17.976px;
-    line-height: 22px;
-    text-align: center;
-    color: #FFFFFF;
-`;
 
-const FooterButtons = styled.p`
-    font-family: 'Lexend Deca';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 17.976px;
-    line-height: 22px;
-    text-align: center;
-    color: #52B6FF;
-`;
-
-const HabitsPageFooter = styled.div`
-    position: relative;
-    width: 100%;
-    padding-left: 36px;
-    padding-right: 31px;
-    margin-top: 22px;
-    display: flex;
-    justify-content: space-between;
-`;
 
 const NoHabitsText = styled.div`
     display: none;
@@ -486,50 +437,13 @@ const HabitsTitle = styled.h1`
     margin-left: 17px;
 `;
 
-const ContainerHabitsPage = createGlobalStyle`
-    body{
-        background-color: #E5E5E5;
-    }
-`;
 
-const DesktopImg = styled.img`
-    position: absolute;
-    width: 51px;
-    height: 51px;
-    right: 18px;
-    top: 9px;
-    border-radius: 50%;
-`;
 
-const DesktopHomePage = styled.p`
-    position: absolute;
-    width: 97px;
-    height: 49px;
-    left: 18px;
-    top: 10px;
-    font-family: 'Playball';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 38.982px;
-    line-height: 49px;
-    color: #FFFFFF;
-`;
-const HeaderPageDesktop = styled.header`
-    width: 100%;
-    height: 70px;
-    background: #126BA5;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-`;
 
-const FooterPageDesktop = styled.footer`
-    z-index: 1;
-    position:fixed;
-    left: 0px;
-    bottom: 0px;
-    width: 100%;
-    height: 70px;
-    background-color: #FFFFFF;
-`;
+
+
+
+
 
 const ContainerIphone8 = styled.div`
     width: 375px;
