@@ -47,7 +47,7 @@ const StandardInput = styled.input`
     border: 1px solid #D5D5D5;
     border-radius: 5px;
     margin-bottom: 6px;
-    color: black;
+    color: #666666;
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
