@@ -2,6 +2,7 @@ import styled from "styled-components";
 import FooterHabits from "../../components/FooterHabits";
 import HeaderHomeUser from "../../components/HeaderHomeUser";
 import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'
 
 export default function HistoryPage() {
     return (
@@ -9,7 +10,7 @@ export default function HistoryPage() {
             <HeaderHomeUser />
             <ContainerIphone8>
                 <PageHistoryTitle>Histórico</PageHistoryTitle>
-                <Calendar />
+                <Calendar calendarType="US" locale="pt"/>
             </ContainerIphone8>
             <FooterHabits />
         </>
