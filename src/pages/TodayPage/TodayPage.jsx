@@ -8,12 +8,12 @@ export default function TodayPage() {
             <HeaderHomeUser />
             <ContainerIphone8>
                 <DayStats>Segunda, 17/05</DayStats>
-                <NoHabitsFinishedPercent>Nenhum hábito concluído ainda</NoHabitsFinishedPercent>
+                <HabitsFinishedPercent>67% dos hábitos concluídos</HabitsFinishedPercent>
                 <ContainerHabitsStats>
                     <HabitTitle>Ler 1 capitulo de livro</HabitTitle>
                     <ContainerTodayStats>
                         <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
-                        <NotMakeTodayOrNotBrokeRecord>{" "}3 dias</NotMakeTodayOrNotBrokeRecord>
+                        <MakeTodayOrBrokeRecord>{" "}3 dias</MakeTodayOrBrokeRecord>
                     </ContainerTodayStats>
                     <ContainerTodayStats>
                         <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
@@ -26,11 +26,11 @@ export default function TodayPage() {
                     <HabitTitle>Ler 1 capitulo de livro</HabitTitle>
                     <ContainerTodayStats>
                         <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
-                        <NotMakeTodayOrNotBrokeRecord>{" "}3 dias</NotMakeTodayOrNotBrokeRecord>
+                        <MakeTodayOrBrokeRecord>{" "}3 dias</MakeTodayOrBrokeRecord>
                     </ContainerTodayStats>
                     <ContainerTodayStats>
                         <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
-                        <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord>
+                        <MakeTodayOrBrokeRecord>5 dias</MakeTodayOrBrokeRecord>
                     </ContainerTodayStats>
                     <BigDailyCheck type="checkbox" />
                 </ContainerHabitsStats>
@@ -137,6 +137,17 @@ const HabitTitle = styled.h3`
     margin-left: 15px;
     margin-top: 13px;
     margin-bottom: 7px;
+`;
+
+const HabitsFinishedPercent = styled.h2`
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    color: #8FC549;
+    padding-left: 17px;
+    margin-bottom: 18px;
 `;
 
 const NoHabitsFinishedPercent = styled.h2`
