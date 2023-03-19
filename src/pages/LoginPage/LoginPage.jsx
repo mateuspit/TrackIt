@@ -58,6 +58,7 @@ const StandardInput = styled.input`
 `;
 
 const LoginSignInButton = styled.button`
+    cursor: pointer;
     width: 303px;
     height: 45px;
     background: #52B6FF;
@@ -73,6 +74,7 @@ const LoginSignInButton = styled.button`
 `;
 
 const LoginPageFooter = styled.p`
+    cursor: pointer;
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
