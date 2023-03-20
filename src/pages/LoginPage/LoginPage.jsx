@@ -9,14 +9,14 @@ import { Link } from "react-router-dom";
 
 export default function LoginPage() {
 
-    const [loginPage, setLoginPage] = React.useState(false);
+    const [loginPageDisable, setLoginPageDisable] = React.useState(false);
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
 
     function getLoginData(event) {
         event.preventDefault();
-        setLoginPage(true);
+        setLoginPageDisable(true);
         const loginSendableObject = {
             email: email,
             password: password
@@ -24,17 +24,29 @@ export default function LoginPage() {
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', loginSendableObject);
         promise.then((response) => {
             // alert("Deu");
-            setLoginPage(false);
+            setLoginPageDisable(false);
+            // const userToken = response.
+            // console.log(response);
+            const userToken = response.data.token;
+            const userImage = response.data.image;
+            console.log(userToken);
+            console.log(userImage);
             navigate('/hoje');
+            // const config = {
+            //     headers: {
+            //         "Authorization": `Bearer ${userToken}`
+            //     }
+            // }
         });
         promise.catch((response) => {
             alert(response.response.data.message);
-            setLoginPage(false);
+            setLoginPageDisable(false);
+            setPassword("");
         });
     }
 
     function loginPageFunction() {
-        if (!loginPage) {
+        if (!loginPageDisable) {
             return (
                 <>
                     <StandardInput required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email" />
@@ -103,6 +115,17 @@ const LoginPageFooterDisable = styled.p`
     text-decoration-line: underline;
     color: #52B6FF;
     margin-top: 25px;
+    a{
+        text-decoration: none;
+        &:link, &:visited {
+            color: #52B6FF;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &:link:active, &:visited:active {
+            color: #52B6FF;
+        }
+    }
 `;
 
 const LoginSignInButtonDisable = styled.button`
