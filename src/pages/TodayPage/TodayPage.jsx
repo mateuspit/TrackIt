@@ -3,11 +3,51 @@ import HeaderHomeUser from "../../components/HeaderHomeUser";
 import FooterHabits from "../../components/FooterHabits";
 
 export default function TodayPage() {
+    // useEffect(() => {
+    //     const todayDate = new Date();
+    //     console.log(todayDate.getDay())
+    // });
+
+    function plotTodayData() {
+        const todayDate = new Date();
+        let weekDay = "";
+        console.log(todayDate.getDay())
+        switch (todayDate.getDay()) {
+            case 0:
+                weekDay = "Domingo";
+                break;
+            case 1:
+                weekDay = "Segunda";
+                break;
+            case 2:
+                weekDay = "Terça";
+                break;
+            case 3:
+                weekDay = "Quarta";
+                break;
+            case 4:
+                weekDay = "Quinta";
+                break;
+            case 5:
+                weekDay = "Sexta";
+                break;
+            case 6:
+                weekDay = "Sábado";
+                break;
+        }
+        const monthDay = todayDate.getDate();
+        const month = todayDate.getMonth();
+        return (
+            <DayStats>{weekDay}, {monthDay}/{month}</DayStats>
+        );
+    }
+
     return (
         <>
             <HeaderHomeUser />
             <ContainerIphone8>
-                <DayStats>Segunda, 17/05</DayStats>
+                {plotTodayData()}
+                {/* <DayStats>Segunda, 17/05</DayStats> */}
                 <HabitsFinishedPercent>67% dos hábitos concluídos</HabitsFinishedPercent>
                 <ContainerHabitsStats>
                     <HabitTitle>Ler 1 capitulo de livro</HabitTitle>

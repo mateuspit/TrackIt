@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css'
 import { formatDate } from "react-calendar/dist/esm/shared/dateFormatter";
 
 function paintSomeDays(date, view){
+    
     if((date.getDate() === 27 && date.getMonth() === 1) || 
     (date.getDate() === 13 && date.getMonth() === 2) || 
     (date.getDate() === 1 && date.getMonth() === 2) || 
@@ -13,6 +14,7 @@ function paintSomeDays(date, view){
     || (date.getDate() === 10 && date.getMonth() === 2)
     || (date.getDate() === 17 && date.getMonth() === 2)
     || (date.getDate() === 3 && date.getMonth() === 2)){
+        console.log(date);
         return "days-did";
     }
     else if (

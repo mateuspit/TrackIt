@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import fullLogo from "../../assets/images/logo-completa.svg"
 import { ThreeDots } from 'react-loader-spinner'
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../components/UserContext";
 
 
 export default function LoginPage() {
@@ -13,6 +14,7 @@ export default function LoginPage() {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
+    const { setConfig, setUserData } = useContext(UserContext);
 
     function getLoginData(event) {
         event.preventDefault();
@@ -23,20 +25,21 @@ export default function LoginPage() {
         };
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', loginSendableObject);
         promise.then((response) => {
-            // alert("Deu");
             setLoginPageDisable(false);
-            // const userToken = response.
-            // console.log(response);
             const userToken = response.data.token;
             const userImage = response.data.image;
             console.log(userToken);
             console.log(userImage);
             navigate('/hoje');
-            // const config = {
-            //     headers: {
-            //         "Authorization": `Bearer ${userToken}`
-            //     }
-            // }
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${userToken}`
+                }
+            }
+            setConfig(config);
+            const userObject = { userImage: userImage }
+            setUserData(userObject);
+            
         });
         promise.catch((response) => {
             alert(response.response.data.message);

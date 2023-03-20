@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function FooterHabits() {
     return (
@@ -6,9 +7,12 @@ export default function FooterHabits() {
             <FooterPageDesktop>
                 <ContainerIphone8>
                     <HabitsPageFooter>
-                        <FooterButtons>Hábitos</FooterButtons>
+                        {/* <FooterButtons>Hábitos</FooterButtons>
                         <FooterButtons>Histórico</FooterButtons>
-                        <CircularProgressBar>Hoje</CircularProgressBar>
+                        <CircularProgressBar>Hoje</CircularProgressBar> */}
+                        <FooterButtons><Link to={`/habitos`}>Hábitos</Link></FooterButtons>
+                        <FooterButtons><Link to={`/historico`}>Histórico</Link></FooterButtons>
+                        <CircularProgressBar><Link to={`/hoje`}>Hoje</Link></CircularProgressBar>
                     </HabitsPageFooter>
                 </ContainerIphone8>
             </FooterPageDesktop>
@@ -57,6 +61,17 @@ const CircularProgressBar = styled.div`
     line-height: 22px;
     text-align: center;
     color: #FFFFFF;
+    a{
+        text-decoration: none;
+        &:link, &:visited {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &:link:active, &:visited:active {
+            color: #ffffff;
+        }
+    }
 `;
 
 const FooterButtons = styled.p`
@@ -67,6 +82,17 @@ const FooterButtons = styled.p`
     line-height: 22px;
     text-align: center;
     color: #52B6FF;
+    a{
+        text-decoration: none;
+        &:link, &:visited {
+            color: #52B6FF;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &:link:active, &:visited:active {
+            color: #52B6FF;
+        }
+    }
 `;
 
 const HabitsPageFooter = styled.div`
