@@ -133,7 +133,7 @@ export default function TodayPage() {
 
     function markAndDesmarkFunction(e, habits) {
         if (e.target.checked) {
-            alert("clicou");
+            // alert("clicou");
             // console.log(habits);
             const habitID = habits.id;
             // console.log(habitID);
@@ -141,7 +141,7 @@ export default function TodayPage() {
             const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}/check`, {}, config);
             promise.then((response) => {
                 console.log(response);
-                alert("clicou post deu certo");
+                // alert("clicou post deu certo");
                 const promiseToRender = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
                 promiseToRender.then((response) => {
                     // console.log(response);
@@ -152,12 +152,30 @@ export default function TodayPage() {
                 });
             });
             promise.catch((response) => {
-                alert("n clicou");
+                // alert("n clicou");
                 alert(response.response.data.message);
             });
         }
         else {
-            alert("desclicou");
+            // alert("desclicou");
+            const habitID = habits.id;
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}/uncheck`, {}, config);
+            promise.then((response) => {
+                console.log(response);
+                // alert("clicou post deu certo");
+                const promiseToRender = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+                promiseToRender.then((response) => {
+                    // console.log(response);
+                    const habits = response.data;
+                    // console.log(habits);
+                    setHabitsList(habits);
+                    setUserHabits(habits);
+                });
+            });
+            promise.catch((response) => {
+                // alert("n clicou");
+                alert(response.response.data.message);
+            });
         }
     }
 
