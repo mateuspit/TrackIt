@@ -28,8 +28,8 @@ export default function LoginPage() {
             setLoginPageDisable(false);
             const userToken = response.data.token;
             const userImage = response.data.image;
-            console.log(userToken);
-            console.log(userImage);
+            // console.log(userToken);
+            // console.log(userImage);
             navigate('/hoje');
             const config = {
                 headers: {

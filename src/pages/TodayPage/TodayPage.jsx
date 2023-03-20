@@ -5,27 +5,27 @@ import { useEffect } from "react";
 import { useContext } from 'react';
 import { UserContext } from "../../components/UserContext";
 import axios from "axios";
+import React from "react";
 
 export default function TodayPage() {
 
     const { config, userData } = useContext(UserContext);
+    const [habitsList, setHabitsList] = React.useState([]);
 
     useEffect(() => {
-        // const todayDate = new Date();
-        // console.log(todayDate.getDay())
-        // console.log(config)
-        console.log(userData)
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
-        promise.then((response)=>{
-            alert("deu")
+        promise.then((response) => {
             console.log(response);
+            const habits = response.data;
+            console.log(habits);
+            setHabitsList(habits);
         });
         promise.catch((response) => {
             alert(response.response.data.message);
         });
-    });
+    }, []);
 
-    function plotTodayData() {
+    function plotTodayDate() {
         const todayDate = new Date();
         let weekDay = "";
         // console.log(todayDate.getDay())
@@ -59,14 +59,107 @@ export default function TodayPage() {
         );
     }
 
+    function plotPercentFinishedHabits() {
+        console.log(habitsList);
+        console.log(habitsList.length);
+        if (habitsList.length === 0) {
+            return (
+                <>
+                    <NoHabitsFinishedPercent>
+                        Não existem hábitos para hoje!
+                    </NoHabitsFinishedPercent>
+                </>
+            );
+        }
+        else {
+            const numberOfFinishedHabits = habitsList.filter(habit => habit.done).length;
+            const totalHabits = habitsList.lenght;
+            const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
+            if (numberOfFinishedHabits === 0) {
+                return (
+                    <NoHabitsFinishedPercent>Nenhum hábito concluído ainda</NoHabitsFinishedPercent>
+                );
+            } else {
+                return (
+                    <>
+                        <HabitsFinishedPercent>{percentOfFinisehdHabits} dos hábitos concluídos</HabitsFinishedPercent>
+                    </>
+                );
+            }
+        }
+    }
+
+    function daySequence(currentSequence, done) {
+        if (done) {
+            return (
+                <>
+                    <MakeTodayOrBrokeRecord>{currentSequence + 1}</MakeTodayOrBrokeRecord>
+                </>
+            );
+        }
+        else {
+            return (
+                <>
+                    <NotMakeTodayOrNotBrokeRecord>{currentSequence}</NotMakeTodayOrNotBrokeRecord>
+                </>
+            );
+        }
+    }
+
+    function recordSequence(recordSequence, currentSequence, done) {
+        if (done && (currentSequence > recordSequence)) {
+            return (
+                <>
+                    <MakeTodayOrBrokeRecord>{currentSequence + 1}</MakeTodayOrBrokeRecord>
+                </>
+            );
+        }
+        else {
+            return (
+                <>
+                    <NotMakeTodayOrNotBrokeRecord>{currentSequence}</NotMakeTodayOrNotBrokeRecord>
+                </>
+            );
+        }
+    }
+
+    function plotHabits() {
+        if (habitsList.length !== 0) {
+            return (
+                <div>
+                    {habitsList.map((habits) =>
+                        <>
+                            <ContainerHabitsStats>
+                                <HabitTitle>{habits.name}</HabitTitle>
+                                <ContainerTodayStats>
+                                    <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
+                                    {daySequence(habits.currentSequence, habits.done)}
+                                    {/* <MakeTodayOrBrokeRecord>{" "}3 dias</MakeTodayOrBrokeRecord> */}
+                                </ContainerTodayStats>
+                                <ContainerTodayStats>
+                                    <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
+                                    {recordSequence(habits.highestSequence, habits.currentSequence, habits.done)}
+                                    {/* <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord> */}
+                                </ContainerTodayStats>
+                                <BigDailyCheck type="checkbox" />
+                            </ContainerHabitsStats>
+                        </>
+                    )}
+                </div>
+            );
+        }
+    }
+
     return (
         <>
             <HeaderHomeUser />
             <ContainerIphone8>
-                {plotTodayData()}
+                {plotTodayDate()}
                 {/* <DayStats>Segunda, 17/05</DayStats> */}
-                <HabitsFinishedPercent>67% dos hábitos concluídos</HabitsFinishedPercent>
-                <ContainerHabitsStats>
+                {plotPercentFinishedHabits()}
+                {/* <HabitsFinishedPercent>67% dos hábitos concluídos</HabitsFinishedPercent> */}
+                {plotHabits()}
+                {/* <ContainerHabitsStats>
                     <HabitTitle>Ler 1 capitulo de livro</HabitTitle>
                     <ContainerTodayStats>
                         <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
@@ -77,33 +170,7 @@ export default function TodayPage() {
                         <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord>
                     </ContainerTodayStats>
                     <BigDailyCheck type="checkbox" />
-                </ContainerHabitsStats>
-
-                <ContainerHabitsStats>
-                    <HabitTitle>Ler 1 capitulo de livro</HabitTitle>
-                    <ContainerTodayStats>
-                        <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
-                        <MakeTodayOrBrokeRecord>{" "}3 dias</MakeTodayOrBrokeRecord>
-                    </ContainerTodayStats>
-                    <ContainerTodayStats>
-                        <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
-                        <MakeTodayOrBrokeRecord>5 dias</MakeTodayOrBrokeRecord>
-                    </ContainerTodayStats>
-                    <BigDailyCheck type="checkbox" />
-                </ContainerHabitsStats>
-
-                <ContainerHabitsStats>
-                    <HabitTitle>Ler 1 capitulo de livro</HabitTitle>
-                    <ContainerTodayStats>
-                        <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
-                        <NotMakeTodayOrNotBrokeRecord>{" "}3 dias</NotMakeTodayOrNotBrokeRecord>
-                    </ContainerTodayStats>
-                    <ContainerTodayStats>
-                        <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
-                        <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord>
-                    </ContainerTodayStats>
-                    <BigDailyCheck type="checkbox" />
-                </ContainerHabitsStats>
+                </ContainerHabitsStats> */}
 
             </ContainerIphone8>
             <FooterHabits />
@@ -192,7 +259,7 @@ const HabitTitle = styled.h3`
     line-height: 25px;
     color: #666666;
     margin-left: 15px;
-    margin-top: 13px;
+    padding-top: 13px;
     margin-bottom: 7px;
 `;
 
