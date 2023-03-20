@@ -13,7 +13,7 @@ export default function HeaderHomeUser() {
             <HeaderPageDesktop />
 
             <DesktopHomePage>
-                <Link to={`/`}>TrackIt</Link>
+                <Link to={`/hoje`}>TrackIt</Link>
             </DesktopHomePage>
             <DesktopImg src={userData.userImage} alt="User img" />
         </div>
@@ -32,6 +32,17 @@ const DesktopHomePage = styled.p`
     font-size: 38.982px;
     line-height: 49px;
     color: #FFFFFF;
+    a{
+        text-decoration: none;
+        &:link, &:visited {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &:link:active, &:visited:active {
+            color: #ffffff;
+        }
+    }
 `;
 const HeaderPageDesktop = styled.header`
     width: 100%;
