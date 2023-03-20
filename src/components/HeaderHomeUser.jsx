@@ -7,7 +7,7 @@ import { UserContext } from "./UserContext";
 export default function HeaderHomeUser() {
     const { userData } = useContext(UserContext);
     return (
-        <>
+        <div data-test="header">
             <ContainerHabitsPage />
             <HeaderPageDesktop />
 
@@ -15,7 +15,7 @@ export default function HeaderHomeUser() {
                 TrackIt
             </DesktopHomePage>
             <DesktopImg src={userData.userImage} alt="User img" />
-        </>
+        </div>
     );
 }
 

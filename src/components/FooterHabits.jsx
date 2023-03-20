@@ -38,13 +38,10 @@ export default function FooterHabits() {
         <>
             <FooterPageDesktop>
                 <ContainerIphone8>
-                    <HabitsPageFooter>
-                        {/* <FooterButtons>Hábitos</FooterButtons>
-                        <FooterButtons>Histórico</FooterButtons>
-                        <CircularProgressBar>Hoje</CircularProgressBar> */}
-                        <FooterButtons><Link to={`/habitos`}>Hábitos</Link></FooterButtons>
-                        <FooterButtons><Link to={`/historico`}>Histórico</Link></FooterButtons>
-                        <CircularProgressBar><Link to={`/hoje`}>
+                    <HabitsPageFooter data-test="menu">
+                        <FooterButtons><Link data-test="habit-link" to={`/habitos`}>Hábitos</Link></FooterButtons>
+                        <FooterButtons><Link data-test="history-link" to={`/historico`}>Histórico</Link></FooterButtons>
+                        <CircularProgressBar data-test="today-link"><Link data-test="today-link" to={`/hoje`}>
                             <CircularProgressbar
                                 value={userPorcent}
                                 text="Hoje"

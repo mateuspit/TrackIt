@@ -52,14 +52,14 @@ export default function LoginPage() {
         if (!loginPageDisable) {
             return (
                 <>
-                    <StandardInput required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email" />
-                    <StandardInput required type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="senha" />
-                    <LoginSignInButton type="submit">
+                    <StandardInput data-test="email-input" required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email" />
+                    <StandardInput data-test="password-input" required type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="senha" />
+                    <LoginSignInButton data-test="login-btn" type="submit">
                         Entrar
                     </LoginSignInButton>
 
                     <LoginPageFooter>
-                        <Link to={`/cadastro`}>
+                        <Link data-test="signup-link" to={`/cadastro`}>
                             Não tem uma conta? Cadastre-se!
                         </Link>
                     </LoginPageFooter>
@@ -71,9 +71,9 @@ export default function LoginPage() {
         else {
             return (
                 <>
-                    <StandarInputDisable disabled value={email} type="email" placeholder="email" />
-                    <StandarInputDisable disabled value={password} type="password" placeholder="senha" />
-                    <LoginSignInButtonDisable type="submit">
+                    <StandarInputDisable disabled data-test="email-input" value={email} type="email" placeholder="email" />
+                    <StandarInputDisable disabled data-test="password-input" value={password} type="password" placeholder="senha" />
+                    <LoginSignInButtonDisable data-test="login-btn" type="submit">
                         <ThreeDots
                             height="80"
                             width="80"
@@ -85,7 +85,7 @@ export default function LoginPage() {
                             visible={true}
                         />
                     </LoginSignInButtonDisable>
-                    <LoginPageFooterDisable>
+                    <LoginPageFooterDisable data-test="signup-link">
                         Não tem uma conta? Cadastre-se!
                     </LoginPageFooterDisable>
                 </>

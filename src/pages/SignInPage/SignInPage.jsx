@@ -40,25 +40,29 @@ export default function SignInPage() {
             return (
                 <>
                     <StandardInput required
+                        data-test="email-input"
                         type="email"
                         value={email} onChange={e => setEmail(e.target.value)}
                         placeholder="email" />
                     <StandardInput required
+                        data-test="password-input"
                         value={password} onChange={e => setPassword(e.target.value)}
                         type="password"
                         placeholder="senha" />
                     <StandardInput required
+                        data-test="user-name-input"
                         type="text"
                         value={name} onChange={e => setName(e.target.value)}
                         placeholder="nome" />
                     <StandardInput required
+                        data-test="user-image-input"
                         value={photo} onChange={e => setPhoto(e.target.value)}
                         placeholder="foto" />
-                    <LoginSignInButton type="submit">
+                    <LoginSignInButton data-test="signup-btn" type="submit">
                         Cadastrar
                     </LoginSignInButton>
                     <LoginPageFooter>
-                        <Link to={`/`}>
+                        <Link data-test="login-link" to={`/`}>
                             Já tem uma conta? Faça login!
                         </Link>
                     </LoginPageFooter>
@@ -69,21 +73,25 @@ export default function SignInPage() {
             return (
                 <>
                     <StandarInputDisable disabled
+                        data-test="email-input"
                         type="email"
                         value={email}
                         placeholder="email" />
                     <StandarInputDisable disabled
+                        data-test="password-input"
                         value={password}
                         type="password"
                         placeholder="senha" />
                     <StandarInputDisable disabled
+                        data-test="user-name-input"
                         type="text"
                         value={name}
                         placeholder="nome" />
                     <StandarInputDisable disabled
+                        data-test="user-image-input"
                         value={photo}
                         placeholder="foto" />
-                    <LoginSignInButtonDisable type="submit">
+                    <LoginSignInButtonDisable data-test="signup-btn" type="submit">
                         <ThreeDots
                             height="80"
                             width="80"
@@ -96,7 +104,7 @@ export default function SignInPage() {
                         />
                     </LoginSignInButtonDisable>
                     <LoginPageFooterDisable>
-                        <Link to={`/`}>
+                        <Link data-test="login-link" to={`/`}>
                             Já tem uma conta? Faça login!
                         </Link>
                     </LoginPageFooterDisable>

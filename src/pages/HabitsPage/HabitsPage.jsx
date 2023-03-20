@@ -26,9 +26,9 @@ export default function HabitsPage() {
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
         promise.then((response) => {
-            console.log(response);
+            // console.log(response);
             const habits = response.data;
-            console.log(habits);
+            // console.log(habits);
             setHabitsList(habits);
         });
         promise.catch((response) => {
@@ -146,14 +146,16 @@ export default function HabitsPage() {
         if (newHabitForm && !newHabitFormDisable) {
             return (
                 <>
-                    <ContainerNewHabitForm onSubmit={getNewHabit}>
+                    <ContainerNewHabitForm data-test="habit-create-container" onSubmit={getNewHabit}>
                         <StandardInput required
                             type="text"
+                            data-test="habit-name-input"
                             value={newHabit} onChange={e => setNewHabit(e.target.value)}
                             placeholder="nome do hábito" />
                         <ContainerDaysChoise>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="D" id="Sunday"
+                                    data-test="habit-day"
                                     checked={sundayCheckBox}
                                     value={sundayCheckBox} onChange={e => setSundayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -161,6 +163,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="S" id="Monday"
+                                    data-test="habit-day"
                                     checked={mondayCheckBox}
                                     value={mondayCheckBox} onChange={e => setMondayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -168,6 +171,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="T" id="Tuesday"
+                                    data-test="habit-day"
                                     checked={tuesdayCheckBox}
                                     value={tuesdayCheckBox} onChange={e => setTuesdayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -175,6 +179,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="Q" id="Wednesday"
+                                    data-test="habit-day"
                                     checked={wednesdayCheckBox}
                                     value={wednesdayCheckBox} onChange={e => setWednesdayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -182,6 +187,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="Q" id="Thursday"
+                                    data-test="habit-day"
                                     checked={thursdayCheckBox}
                                     value={thursdayCheckBox} onChange={e => setThursdayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -189,6 +195,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="S" id="Friday"
+                                    data-test="habit-day"
                                     checked={fridayCheckBox}
                                     value={fridayCheckBox} onChange={e => setFridayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -196,6 +203,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="S" id="Saturday"
+                                    data-test="habit-day"
                                     checked={saturdayCheckBox}
                                     value={saturdayCheckBox} onChange={e => setSaturdayCheckBox(e.target.checked)}
                                     type="checkbox" />
@@ -204,8 +212,8 @@ export default function HabitsPage() {
                         </ContainerDaysChoise>
 
                         <InputsContainerButtons>
-                            <CancelNewHabitButton type="reset">Cancelar</CancelNewHabitButton>
-                            <SaveNewHabitButton type="submit">Salvar</SaveNewHabitButton>
+                            <CancelNewHabitButton data-test="habit-create-cancel" type="reset">Cancelar</CancelNewHabitButton>
+                            <SaveNewHabitButton data-test="habit-create-save-btn" type="submit">Salvar</SaveNewHabitButton>
                         </InputsContainerButtons>
                     </ContainerNewHabitForm>
                 </>
@@ -221,15 +229,17 @@ export default function HabitsPage() {
             // console.log(saturdayCheckBox);
             return (
                 <>
-                    <ContainerNewHabitForm>
+                    <ContainerNewHabitForm data-test="habit-create-container">
                         <StandardInputDisabled required
                             disabled
+                            data-test="habit-name-input"
                             type="text"
                             value={newHabit}
                             placeholder="nome do hábito" />
                         <ContainerDaysChoise>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="D" id="Sunday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={sundayCheckBox}
                                     value={sundayCheckBox}
@@ -238,6 +248,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="S" id="Monday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={mondayCheckBox}
                                     value={mondayCheckBox}
@@ -246,6 +257,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="T" id="Tuesday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={tuesdayCheckBox}
                                     value={tuesdayCheckBox}
@@ -254,6 +266,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="Q" id="Wednesday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={wednesdayCheckBox}
                                     value={wednesdayCheckBox}
@@ -262,6 +275,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="Q" id="Thursday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={thursdayCheckBox}
                                     value={thursdayCheckBox}
@@ -270,6 +284,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="S" id="Friday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={fridayCheckBox}
                                     value={fridayCheckBox}
@@ -278,6 +293,7 @@ export default function HabitsPage() {
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBoxDisabled letter="S" id="Saturday"
+                                    data-test="habit-day"
                                     disabled
                                     checked={saturdayCheckBox}
                                     value={saturdayCheckBox}
@@ -287,8 +303,8 @@ export default function HabitsPage() {
                         </ContainerDaysChoise>
 
                         <InputsContainerButtons>
-                            <CancelNewHabitButtonDisabled disabled type="reset">Cancelar</CancelNewHabitButtonDisabled>
-                            <SaveNewHabitButtonDisabled disabled type="submit">
+                            <CancelNewHabitButtonDisabled data-test="habit-create-cancel" disabled type="reset">Cancelar</CancelNewHabitButtonDisabled>
+                            <SaveNewHabitButtonDisabled data-test="habit-create-save-btn" disabled type="submit">
                                 <ThreeDots
                                     height="45"
                                     width="45"
@@ -333,37 +349,37 @@ export default function HabitsPage() {
     function renderHabitsFunction(habit) {
         return (
             <>
-                <ContainerHabits>
-                    <HabitTitle>{habit.name}</HabitTitle>
+                <ContainerHabits data-test="habit-container">
+                    <HabitTitle data-test="habit-name">{habit.name}</HabitTitle>
                     <ContainerDaysChoise>
-                        <TrashDiv onClick={() => deleteHabitFunction(habit)}><BiTrash size={20} /></TrashDiv>
+                        <TrashDiv data-test="habit-delete-btn" onClick={() => deleteHabitFunction(habit)}><BiTrash size={20} /></TrashDiv>
 
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(0)} letter="D" id="Sunday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(0)} letter="D" id="Sunday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(1)} letter="S" id="Monday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(1)} letter="S" id="Monday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(2)} letter="T" id="Tuesday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(2)} letter="T" id="Tuesday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(3)} letter="Q" id="Wednesday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(3)} letter="Q" id="Wednesday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(4)} letter="Q" id="Thursday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(4)} letter="Q" id="Thursday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(5)} letter="S" id="Friday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(5)} letter="S" id="Friday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
                         </CheckBoxContainer>
                         <CheckBoxContainer>
-                            <DayCheckBox disabled checked={habit.days.includes(6)} letter="S" id="Saturday" type="checkbox" />
+                            <DayCheckBox data-test="habit-day" disabled checked={habit.days.includes(6)} letter="S" id="Saturday" type="checkbox" />
                             <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
                         </CheckBoxContainer>
                     </ContainerDaysChoise>
@@ -381,7 +397,7 @@ export default function HabitsPage() {
             <ContainerIphone8>
                 <HabitsHeader>
                     <HabitsTitle>Meus hábitos</HabitsTitle>
-                    <NewHabitButton onClick={openNewHabitFormFunction}>+</NewHabitButton>
+                    <NewHabitButton data-test="habit-create-btn" onClick={openNewHabitFormFunction}>+</NewHabitButton>
                 </HabitsHeader>
 
                 {newHabitFormFunction()}

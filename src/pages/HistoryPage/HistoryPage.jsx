@@ -14,7 +14,7 @@ function paintSomeDays(date, view){
     || (date.getDate() === 10 && date.getMonth() === 2)
     || (date.getDate() === 17 && date.getMonth() === 2)
     || (date.getDate() === 3 && date.getMonth() === 2)){
-        console.log(date);
+        // console.log(date);
         return "days-did";
     }
     else if (
@@ -33,6 +33,7 @@ export default function HistoryPage() {
                 <PageHistoryTitle>Histórico</PageHistoryTitle>
                 {/* <StyledCalendar formatDay={(locale, date) => formatDate(date, 'd')} calendarType="US" locale="pt"/> */}
                 <StyledCalendar 
+                data-test="calendar"
                 tileClassName={({ activeStartDate, date, view }) => paintSomeDays(date,view)}
                 calendarType="US" 
                 locale="pt"/>
