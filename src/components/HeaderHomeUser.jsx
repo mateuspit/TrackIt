@@ -1,8 +1,11 @@
 import userImg from "../assets/images/pongebob.png"
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
+import { useContext } from 'react';
+import { UserContext } from "./UserContext";
 
 export default function HeaderHomeUser() {
+    const { userData } = useContext(UserContext);
     return (
         <>
             <ContainerHabitsPage />
@@ -11,7 +14,7 @@ export default function HeaderHomeUser() {
             <DesktopHomePage>
                 TrackIt
             </DesktopHomePage>
-            <DesktopImg src={userImg} alt="User img" />
+            <DesktopImg src={userData.userImage} alt="User img" />
         </>
     );
 }

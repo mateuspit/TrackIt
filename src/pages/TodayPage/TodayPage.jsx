@@ -1,17 +1,34 @@
 import styled from "styled-components";
 import HeaderHomeUser from "../../components/HeaderHomeUser";
 import FooterHabits from "../../components/FooterHabits";
+import { useEffect } from "react";
+import { useContext } from 'react';
+import { UserContext } from "../../components/UserContext";
+import axios from "axios";
 
 export default function TodayPage() {
-    // useEffect(() => {
-    //     const todayDate = new Date();
-    //     console.log(todayDate.getDay())
-    // });
+
+    const { config, userData } = useContext(UserContext);
+
+    useEffect(() => {
+        // const todayDate = new Date();
+        // console.log(todayDate.getDay())
+        // console.log(config)
+        console.log(userData)
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+        promise.then((response)=>{
+            alert("deu")
+            console.log(response);
+        });
+        promise.catch((response) => {
+            alert(response.response.data.message);
+        });
+    });
 
     function plotTodayData() {
         const todayDate = new Date();
         let weekDay = "";
-        console.log(todayDate.getDay())
+        // console.log(todayDate.getDay())
         switch (todayDate.getDay()) {
             case 0:
                 weekDay = "Domingo";
