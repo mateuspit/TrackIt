@@ -4,13 +4,14 @@ import { ThreeDots } from 'react-loader-spinner'
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function LoginPage() {
 
     const [loginPage, setLoginPage] = React.useState(false);
     const [email, setEmail] = React.useState("");
-	const [password, setPassword] = React.useState("");
+    const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
 
     function getLoginData(event) {
@@ -22,15 +23,13 @@ export default function LoginPage() {
         };
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', loginSendableObject);
         promise.then((response) => {
-            alert("Deu");
-            console.log(response)
+            // alert("Deu");
             setLoginPage(false);
-            navigate('/hoje');       
+            navigate('/hoje');
         });
-        promise.catch((response)=>{
+        promise.catch((response) => {
             alert(response.response.data.message);
-            console.log(response);
-            setLoginPage(false);  
+            setLoginPage(false);
         });
     }
 
@@ -43,9 +42,12 @@ export default function LoginPage() {
                     <LoginSignInButton type="submit">
                         Entrar
                     </LoginSignInButton>
-                    <LoginPageFooter>
-                        Não tem uma conta? Cadastre-se!
-                    </LoginPageFooter>
+                    <Link to={`/cadastro`}>
+                        <LoginPageFooter>
+                            Não tem uma conta? Cadastre-se!
+                        </LoginPageFooter>
+                    </Link>
+
                 </>
             );
         }
