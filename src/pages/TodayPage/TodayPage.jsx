@@ -9,7 +9,7 @@ import React from "react";
 
 export default function TodayPage() {
 
-    const { config, userData } = useContext(UserContext);
+    const { config, userData, setUserHabits } = useContext(UserContext);
     const [habitsList, setHabitsList] = React.useState([]);
 
     useEffect(() => {
@@ -19,6 +19,7 @@ export default function TodayPage() {
             const habits = response.data;
             console.log(habits);
             setHabitsList(habits);
+            setUserHabits(habits);
         });
         promise.catch((response) => {
             alert(response.response.data.message);

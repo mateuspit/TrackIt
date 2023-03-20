@@ -6,9 +6,31 @@ import {
     buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { useContext } from 'react';
+import { UserContext } from "./UserContext";
+import { useEffect, useState } from "react";
+
 
 export default function FooterHabits() {
-    const percentage = 20;
+    const { userHabits } = useContext(UserContext);
+    const [percent, setPercent] = useState(0)
+    // const percentage = 20;
+    useEffect(() => {
+        // if(userHabits.){
+
+        // }
+        const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
+        const totalHabits = userHabits.lenght;
+        const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
+        console.log(numberOfFinishedHabits);
+        console.log(percent);
+        if (numberOfFinishedHabits === 0) {
+            setPercent(0);
+        }
+        else {
+            setPercent(percentOfFinisehdHabits);
+        }
+    }, []);
     return (
         <>
             <FooterPageDesktop>
@@ -21,7 +43,7 @@ export default function FooterHabits() {
                         <FooterButtons><Link to={`/historico`}>Histórico</Link></FooterButtons>
                         <CircularProgressBar><Link to={`/hoje`}>
                             <CircularProgressbar
-                                value={percentage}
+                                value={percent}
                                 text="Hoje"
                                 background
                                 backgroundPadding={6}
