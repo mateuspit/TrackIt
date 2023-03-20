@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import fullLogo from "../../assets/images/logo-completa.svg"
+import { Link } from "react-router-dom";
 
 export default function SignInPage() {
     return (
@@ -13,9 +14,13 @@ export default function SignInPage() {
                 <LoginSignInButton type="submit">
                     Cadastrar
                 </LoginSignInButton>
+
                 <LoginPageFooter>
-                    Já tem uma conta? Faça login!
+                    <Link to={`/`}>
+                        Já tem uma conta? Faça login!
+                    </Link>
                 </LoginPageFooter>
+
             </FormContainer>
         </ContainerIphone8>
     );
@@ -84,4 +89,15 @@ const LoginPageFooter = styled.p`
     text-decoration-line: underline;
     color: #52B6FF;
     margin-top: 25px;
+    a{
+        text-decoration: none;
+        &:link, &:visited {
+            color: #52B6FF;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &:link:active, &:visited:active {
+            color: #52B6FF;
+        }
+    }
 `;

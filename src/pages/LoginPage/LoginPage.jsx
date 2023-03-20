@@ -42,11 +42,13 @@ export default function LoginPage() {
                     <LoginSignInButton type="submit">
                         Entrar
                     </LoginSignInButton>
-                    <Link to={`/cadastro`}>
-                        <LoginPageFooter>
+
+                    <LoginPageFooter>
+                        <Link to={`/cadastro`}>
                             Não tem uma conta? Cadastre-se!
-                        </LoginPageFooter>
-                    </Link>
+                        </Link>
+                    </LoginPageFooter>
+
 
                 </>
             );
@@ -209,4 +211,15 @@ const LoginPageFooter = styled.p`
     text-decoration-line: underline;
     color: #52B6FF;
     margin-top: 25px;
+    a{
+        text-decoration: none;
+        &:link, &:visited {
+            color: #52B6FF;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        &:link:active, &:visited:active {
+            color: #52B6FF;
+        }
+    }
 `;
