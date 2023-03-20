@@ -11,6 +11,7 @@ export default function TodayPage() {
 
     const { config, userData, setUserHabits } = useContext(UserContext);
     const [habitsList, setHabitsList] = React.useState([]);
+    const [habitsChecked, setHabitsChecked] = React.useState([]);
 
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
@@ -124,8 +125,40 @@ export default function TodayPage() {
         }
     }
 
+
+    function markAndDesmarkFunction(e, habits) {
+        if (e.target.checked) {
+            alert("clicou");
+            // console.log(habits);
+            const habitID = habits.id;
+            // console.log(habitID);
+            // console.log(config);
+            const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}/check`, {}, config);
+            promise.then((response) => {
+                console.log(response);
+                alert("clicou post deu certo");
+                const promiseToRender = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+                promiseToRender.then((response) => {
+                    // console.log(response);
+                    const habits = response.data;
+                    // console.log(habits);
+                    setHabitsList(habits);
+                    setUserHabits(habits);
+                });
+            });
+            promise.catch((response) => {
+                alert("n clicou");
+                alert(response.response.data.message);
+            });
+        }
+        else {
+            alert("desclicou");
+        }
+    }
+
     function plotHabits() {
         if (habitsList.length !== 0) {
+            console.log(habitsList);
             return (
                 <div>
                     {habitsList.map((habits) =>
@@ -142,7 +175,8 @@ export default function TodayPage() {
                                     {recordSequence(habits.highestSequence, habits.currentSequence, habits.done)}
                                     {/* <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord> */}
                                 </ContainerTodayStats>
-                                <BigDailyCheck type="checkbox" />
+                                {/* <BigDailyCheck value={} onClick={markAndDesmarkFunction} type="checkbox" /> */}
+                                <BigDailyCheck checked={habits.done} onClick={(e) => markAndDesmarkFunction(e, habits)} type="checkbox" />
                             </ContainerHabitsStats>
                         </>
                     )}
