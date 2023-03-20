@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import { useContext } from 'react';
 import { UserContext } from "./UserContext";
+import { Link } from "react-router-dom";
 
 export default function HeaderHomeUser() {
     const { userData } = useContext(UserContext);
