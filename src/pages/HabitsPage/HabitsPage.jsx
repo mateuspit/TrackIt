@@ -2,19 +2,97 @@ import styled from "styled-components";
 import { BiTrash } from "react-icons/bi"
 import HeaderHomeUser from "../../components/HeaderHomeUser";
 import FooterHabits from "../../components/FooterHabits";
+import { useContext } from 'react';
+import { UserContext } from "../../components/UserContext";
+import axios from "axios";
+import { useEffect } from "react";
+import React from "react";
 
 export default function HabitsPage() {
+    const [habitsList, setHabitsList] = React.useState([]);
+    const { config, userData, setUserHabits } = useContext(UserContext);
+
+    useEffect(() => {
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
+        promise.then((response) => {
+            console.log(response);
+            const habits = response.data;
+            setHabitsList(habits);
+        });
+        promise.catch((response) => {
+            alert(response.response.data.message);
+        });
+    }, []);
+
+    function openNewHabitFormFunction() {
+        alert("button")
+        return (
+            <ContainerNewHabitForm>
+                <StandardInput required placeholder="nome do hábito" />
+                <ContainerDaysChoise>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="D" id="Sunday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="S" id="Monday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="T" id="Tuesday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="Q" id="Wednesday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="Q" id="Thursday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="S" id="Friday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
+                    </CheckBoxContainer>
+                    <CheckBoxContainer>
+                        <DayCheckBox letter="S" id="Saturday" type="checkbox" />
+                        <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
+                    </CheckBoxContainer>
+                </ContainerDaysChoise>
+
+                <InputsContainerButtons>
+                    <CancelNewHabitButton type="reset">Cancelar</CancelNewHabitButton>
+                    <SaveNewHabitButton type="submit">Salvar</SaveNewHabitButton>
+                </InputsContainerButtons>
+            </ContainerNewHabitForm>
+        );
+    }
+
+    function existenceOfHabitsFunction() {
+        if (habitsList.length === 0) {
+            return (
+                <>
+                    <NoHabitsText>
+                        Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
+                    </NoHabitsText>
+                </>
+            );
+        }
+    }
+
     return (
         <>
             <HeaderHomeUser />
 
+
+
             <ContainerIphone8>
                 <HabitsHeader>
                     <HabitsTitle>Meus hábitos</HabitsTitle>
-                    <NewHabitButton>+</NewHabitButton>
+                    <NewHabitButton onClick={openNewHabitFormFunction}>+</NewHabitButton>
                 </HabitsHeader>
 
-                <ContainerNewHabitForm>
+                {/* <ContainerNewHabitForm>
                     <StandardInput required placeholder="nome do hábito" />
                     <ContainerDaysChoise>
                         <CheckBoxContainer>
@@ -51,7 +129,7 @@ export default function HabitsPage() {
                         <CancelNewHabitButton type="reset">Cancelar</CancelNewHabitButton>
                         <SaveNewHabitButton type="submit">Salvar</SaveNewHabitButton>
                     </InputsContainerButtons>
-                </ContainerNewHabitForm>
+                </ContainerNewHabitForm> */}
 
                 <ContainerHabits>
                     <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
@@ -88,7 +166,7 @@ export default function HabitsPage() {
                     </ContainerDaysChoise>
                 </ContainerHabits>
 
-                <ContainerHabits>
+                {/* <ContainerHabits>
                     <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
                     <ContainerDaysChoise>
                         <TrashDiv><BiTrash size={20} /></TrashDiv>
@@ -121,9 +199,9 @@ export default function HabitsPage() {
                             <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
                         </CheckBoxContainer>
                     </ContainerDaysChoise>
-                </ContainerHabits>
+                </ContainerHabits> */}
 
-                <ContainerHabits>
+                {/* <ContainerHabits>
                     <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
                     <ContainerDaysChoise>
                         <TrashDiv><BiTrash size={20} /></TrashDiv>
@@ -156,19 +234,19 @@ export default function HabitsPage() {
                             <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
                         </CheckBoxContainer>
                     </ContainerDaysChoise>
-                </ContainerHabits>
+                </ContainerHabits> */}
 
 
 
 
-
-                <NoHabitsText>
+                {existenceOfHabitsFunction()}
+                {/* <NoHabitsText>
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
-                </NoHabitsText>
+                </NoHabitsText> */}
             </ContainerIphone8>
-            
+
             <FooterHabits />
-            
+
         </>
     );
 }
@@ -371,7 +449,8 @@ const StandardInput = styled.input`
 `;
 
 const ContainerNewHabitForm = styled.form`
-    display: none;
+    display: flex;
+    flex-direction: column;
     width: 340px;
     height: 180px;
     background: #FFFFFF;
@@ -384,7 +463,7 @@ const ContainerNewHabitForm = styled.form`
 
 
 const NoHabitsText = styled.div`
-    display: none;
+    display: flex;
     margin-left: 17px;
     margin-right: 20px;
     margin-top: 28px;
