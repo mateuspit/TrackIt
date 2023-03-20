@@ -319,4 +319,5 @@ const ContainerIphone8 = styled.div`
     /* background-color: #E5E5E5; */
     margin: auto;
     /* margin-top: 68px; */
+    margin-bottom: 80px;
 `;
