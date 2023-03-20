@@ -14,26 +14,10 @@ import { useEffect, useState } from "react";
 export default function FooterHabits() {
     const { userPorcent } = useContext(UserContext);
     const [percent, setPercent] = useState(0)
-    // const percentage = 20;
-    useEffect(() => {
-        // if(userHabits.){
 
-        // }
-        // const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
-        // const totalHabits = userHabits.lenght;
-        // const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
-        // const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
-        // const totalHabits = userHabits.length;
-        // const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
-        // console.log(numberOfFinishedHabits);
-        // console.log(percentOfFinisehdHabits);
-        // if (userPorcent === 0) {
-        // setPercent(0);
-        // }
-        // else {
+    useEffect(() => {
         setPercent(userPorcent);
-        // }
-    }, userPorcent);
+    }, [userPorcent]);
     return (
         <>
             <FooterPageDesktop>
