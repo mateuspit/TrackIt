@@ -7,11 +7,21 @@ import { UserContext } from "../../components/UserContext";
 import axios from "axios";
 import { useEffect } from "react";
 import React from "react";
+import { ThreeDots } from 'react-loader-spinner'
 
 export default function HabitsPage() {
     const [habitsList, setHabitsList] = React.useState([]);
     const { config, userData, setUserHabits } = useContext(UserContext);
     const [newHabitForm, setNewHabitForm] = React.useState(false);
+    const [newHabit, setNewHabit] = React.useState("");
+    const [sundayCheckBox, setSundayCheckBox] = React.useState(false);
+    const [mondayCheckBox, setMondayCheckBox] = React.useState(false);
+    const [tuesdayCheckBox, setTuesdayCheckBox] = React.useState(false);
+    const [wednesdayCheckBox, setWednesdayCheckBox] = React.useState(false);
+    const [thursdayCheckBox, setThursdayCheckBox] = React.useState(false);
+    const [fridayCheckBox, setFridayCheckBox] = React.useState(false);
+    const [saturdayCheckBox, setSaturdayCheckBox] = React.useState(false);
+    const [newHabitFormDisable, setNewHabitFormDisable] = React.useState(false);
 
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
@@ -27,12 +37,22 @@ export default function HabitsPage() {
     }, []);
 
     function openNewHabitFormFunction() {
-        alert("button");
+        // alert("button");
         if (!newHabitForm) {
             setNewHabitForm(true);
         }
         else {
             setNewHabitForm(false);
+            setNewHabitFormDisable(false);
+            setNewHabit("");
+            setSundayCheckBox(false);
+            setMondayCheckBox(false);
+            setTuesdayCheckBox(false);
+            setWednesdayCheckBox(false);
+            setThursdayCheckBox(false);
+            setFridayCheckBox(false);
+            setSaturdayCheckBox(false);
+            setNewHabitFormDisable(false);
         }
 
     }
@@ -49,39 +69,129 @@ export default function HabitsPage() {
         }
     }
 
+    function getNewHabit(event) {
+        event.preventDefault();
+        // alert("peguei dados");
+        // console.log(newHabit);
+        // console.log(sundayCheckBox);
+        // console.log(mondayCheckBox);
+        // console.log(tuesdayCheckBox);
+        // console.log(wednesdayCheckBox);
+        // console.log(thursdayCheckBox);
+        // console.log(fridayCheckBox);
+        // console.log(saturdayCheckBox);
+        if (sundayCheckBox || mondayCheckBox || tuesdayCheckBox || wednesdayCheckBox || thursdayCheckBox || fridayCheckBox || saturdayCheckBox) {
+            // alert("get data");
+            // setNewHabitForm(false);
+            const days = [];
+            if (sundayCheckBox) {
+                days.push(0);
+            }
+            if (mondayCheckBox) {
+                days.push(1);
+            }
+            if (tuesdayCheckBox) {
+                days.push(2);
+            }
+            if (wednesdayCheckBox) {
+                days.push(3);
+            }
+            if (thursdayCheckBox) {
+                days.push(4);
+            }
+            if (fridayCheckBox) {
+                days.push(5);
+            }
+            if (saturdayCheckBox) {
+                days.push(6);
+            }
+            console.log(days);
+            const newHabitSendableObject = {
+                name: newHabit,
+                days: days
+            };
+            console.log(newHabitSendableObject);
+            setNewHabitFormDisable(true);
+            const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', newHabitSendableObject, config);
+            promise.then((response) => {
+                alert("deu o post");
+                console.log(habitsList);
+                console.log(response);
+                const newHabitsList = habitsList.concat(response.data);
+                console.log(newHabitsList);
+                setHabitsList(newHabitsList);
+                console.log(response);
+                setNewHabitFormDisable(false);
+                setNewHabitForm(false);
+                setNewHabit("");
+            });
+            promise.catch((response) => {
+                alert("n deu o post");
+                console.log(response.response.data.message);
+            });
+        }
+        else {
+            alert("Escolha pelo menos um dia da semana")
+        }
+    }
+
     function newHabitFormFunction() {
-        if (newHabitForm) {
+        if (newHabitForm && !newHabitFormDisable) {
             return (
                 <>
-                    <ContainerNewHabitForm>
-                        <StandardInput required placeholder="nome do hábito" />
+                    <ContainerNewHabitForm onSubmit={getNewHabit}>
+                        <StandardInput required
+                            type="text"
+                            value={newHabit} onChange={e => setNewHabit(e.target.value)}
+                            placeholder="nome do hábito" />
                         <ContainerDaysChoise>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="D" id="Sunday" type="checkbox" />
+                                <DayCheckBox letter="D" id="Sunday"
+
+                                    value={sundayCheckBox} onChange={e => setSundayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="S" id="Monday" type="checkbox" />
+                                <DayCheckBox letter="S" id="Monday"
+
+                                    value={mondayCheckBox} onChange={e => setMondayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="T" id="Tuesday" type="checkbox" />
+                                <DayCheckBox letter="T" id="Tuesday"
+
+                                    value={tuesdayCheckBox} onChange={e => setTuesdayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="Q" id="Wednesday" type="checkbox" />
+                                <DayCheckBox letter="Q" id="Wednesday"
+
+                                    value={wednesdayCheckBox} onChange={e => setWednesdayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="Q" id="Thursday" type="checkbox" />
+                                <DayCheckBox letter="Q" id="Thursday"
+
+                                    value={thursdayCheckBox} onChange={e => setThursdayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="S" id="Friday" type="checkbox" />
+                                <DayCheckBox letter="S" id="Friday"
+
+                                    value={fridayCheckBox} onChange={e => setFridayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
-                                <DayCheckBox letter="S" id="Saturday" type="checkbox" />
+                                <DayCheckBox letter="S" id="Saturday"
+
+                                    value={saturdayCheckBox} onChange={e => setSaturdayCheckBox(e.target.checked)}
+                                    type="checkbox" />
                                 <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
                             </CheckBoxContainer>
                         </ContainerDaysChoise>
@@ -94,18 +204,104 @@ export default function HabitsPage() {
                 </>
             );
         }
+        else if (newHabitForm && newHabitFormDisable) {
+            // console.log(sundayCheckBox);
+            // console.log(mondayCheckBox);
+            // console.log(tuesdayCheckBox);
+            // console.log(wednesdayCheckBox);
+            // console.log(thursdayCheckBox);
+            // console.log(fridayCheckBox);
+            // console.log(saturdayCheckBox);
+            return (
+                <>
+                    <ContainerNewHabitForm>
+                        <StandardInputDisabled required
+                            disabled
+                            type="text"
+                            value={newHabit}
+                            placeholder="nome do hábito" />
+                        <ContainerDaysChoise>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="D" id="Sunday"
+                                    disabled
+                                    checked={sundayCheckBox}
+                                    value={sundayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
+                            </CheckBoxContainer>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="S" id="Monday"
+                                    disabled
+                                    checked={mondayCheckBox}
+                                    value={mondayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
+                            </CheckBoxContainer>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="T" id="Tuesday"
+                                    disabled
+                                    checked={tuesdayCheckBox}
+                                    value={tuesdayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
+                            </CheckBoxContainer>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="Q" id="Wednesday"
+                                    disabled
+                                    checked={wednesdayCheckBox}
+                                    value={wednesdayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
+                            </CheckBoxContainer>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="Q" id="Thursday"
+                                    disabled
+                                    checked={thursdayCheckBox}
+                                    value={thursdayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
+                            </CheckBoxContainer>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="S" id="Friday"
+                                    disabled
+                                    checked={fridayCheckBox}
+                                    value={fridayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
+                            </CheckBoxContainer>
+                            <CheckBoxContainer>
+                                <DayCheckBoxDisabled letter="S" id="Saturday"
+                                    disabled
+                                    checked={saturdayCheckBox}
+                                    value={saturdayCheckBox}
+                                    type="checkbox" />
+                                <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
+                            </CheckBoxContainer>
+                        </ContainerDaysChoise>
+
+                        <InputsContainerButtons>
+                            <CancelNewHabitButtonDisabled disabled type="reset">Cancelar</CancelNewHabitButtonDisabled>
+                            <SaveNewHabitButtonDisabled disabled type="submit">
+                                <ThreeDots
+                                    height="45"
+                                    width="45"
+                                    radius="9"
+                                    color="#ffffff"
+                                    ariaLabel="three-dots-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClassName=""
+                                    visible={true}
+                                />
+                            </SaveNewHabitButtonDisabled>
+                        </InputsContainerButtons>
+                    </ContainerNewHabitForm>
+
+                </>
+            );
+        }
     }
 
     function renderHabitsFunction(habit) {
-        let daysToMakeHabit = {
-            sunday: "",
-            monday: "",
-            tuesday: "",
-            wednesday: "",
-            thursday: "",
-            friday: "",
-            saturday: ""
-        }
         return (
             <>
                 <ContainerHabits>
@@ -161,151 +357,10 @@ export default function HabitsPage() {
 
                 {newHabitFormFunction()}
 
-                {/* <ContainerNewHabitForm>
-                    <StandardInput required placeholder="nome do hábito" />
-                    <ContainerDaysChoise>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="D" id="Sunday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="S" id="Monday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="T" id="Tuesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="Q" id="Wednesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="Q" id="Thursday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="S" id="Friday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox letter="S" id="Saturday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                    </ContainerDaysChoise>
+                <ContainerAllHabits>
+                    {habitsList.map((habits) => renderHabitsFunction(habits))}
+                </ContainerAllHabits>
 
-                    <InputsContainerButtons>
-                        <CancelNewHabitButton type="reset">Cancelar</CancelNewHabitButton>
-                        <SaveNewHabitButton type="submit">Salvar</SaveNewHabitButton>
-                    </InputsContainerButtons>
-                </ContainerNewHabitForm> */}
-
-                {habitsList.map((habits)=>renderHabitsFunction(habits))}
-
-                {/* <ContainerHabits>
-                    <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
-                    <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20} /></TrashDiv>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="S" id="Monday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="T" id="Tuesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="Q" id="Wednesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="Q" id="Thursday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="S" id="Friday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="S" id="Saturday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                    </ContainerDaysChoise>
-                </ContainerHabits> */}
-
-                {/* <ContainerHabits>
-                    <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
-                    <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20} /></TrashDiv>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="S" id="Monday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="T" id="Tuesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="Q" id="Wednesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="Q" id="Thursday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="S" id="Friday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="S" id="Saturday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                    </ContainerDaysChoise>
-                </ContainerHabits> */}
-
-                {/* <ContainerHabits>
-                    <HabitTitle>Ler 1 capítulo de livro</HabitTitle>
-                    <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20} /></TrashDiv>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="D" id="Sunday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="S" id="Monday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="T" id="Tuesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="Q" id="Wednesday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="Q" id="Thursday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled checked letter="S" id="Friday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                        <CheckBoxContainer>
-                            <DayCheckBox disabled letter="S" id="Saturday" type="checkbox" />
-                            <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
-                        </CheckBoxContainer>
-                    </ContainerDaysChoise>
-                </ContainerHabits> */}
 
 
 
@@ -322,6 +377,10 @@ export default function HabitsPage() {
     );
 }
 
+const ContainerAllHabits = styled.div`
+    margin-bottom: 80px;
+`;
+
 const TrashDiv = styled.div`
     position: absolute;
     bottom: 45px;
@@ -336,7 +395,7 @@ const HabitTitle = styled.h1`
     line-height: 25px;
     color: #666666;
     margin-left: 19px;
-    margin-top: 13px;
+    padding-top: 13px;
 `;
 
 const ContainerHabits = styled.div`
@@ -345,6 +404,26 @@ const ContainerHabits = styled.div`
     background: #FFFFFF;
     border-radius: 5px;
     margin-top: 10px;
+    
+`;
+
+const SaveNewHabitButtonDisabled = styled.button`
+    width: 84px;
+    height: 35px;
+    background: #52B6FF;
+    border-radius: 4.63636px;
+    border: none;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.976px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    opacity: 0.7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const SaveNewHabitButton = styled.button`
@@ -368,6 +447,22 @@ const InputsContainerButtons = styled.div`
     align-items: center;
     margin-top: 29px;
     margin-right: 18px;
+`;
+
+const CancelNewHabitButtonDisabled = styled.button`
+    width: 69px;
+    height: 20px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15.976px;
+    line-height: 20px;
+    text-align: center;
+    color: #52B6FF;
+    background-color: white;
+    border:none;
+    margin-right: 23px;
+    opacity: 0.7;
 `;
 
 const CancelNewHabitButton = styled.button`
@@ -400,6 +495,58 @@ const CheckBoxLabel = styled.label`
 const CheckBoxContainer = styled.div`
     position: relative;
     margin-right: 4px;
+`;
+
+const DayCheckBoxDisabled = styled.input`
+    width: 30px;
+    height: 30px;
+    &[type="checkbox"] {
+        /* Add if not using autoprefixer */
+        -webkit-appearance: none;
+        appearance: none;
+        /* For iOS < 15 to remove gradient background */
+        background-color: #fff;
+        /* Not removed via appearance */
+        margin: 0;
+        font: inherit;
+        border: 1px solid #D5D5D5;
+        border-radius: 5px;
+    }
+    &[type="checkbox"]:checked:before {
+        content: "${props => props.letter}";
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
+        color: #FFFFFF;
+        display: flex;
+        justify-content: center;
+    }
+
+    &[type="checkbox"]{
+        content: "${props => props.letter}";
+        font-family: 'Lexend Deca';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 19.976px;
+        line-height: 25px;
+        color: black;
+        display: flex;
+        justify-content: center;
+    }
+
+    &[type="checkbox"]:checked {
+        border: 1px solid #CFCFCF;
+        color: white;
+        background: #CFCFCF;
+    }
+    
+    &[type="checkbox"]:checked + label {
+        display:none;
+        color: red;
+        text-align: center;
+    }
 `;
 
 const DayCheckBox = styled.input`
@@ -452,42 +599,6 @@ const DayCheckBox = styled.input`
         color: red;
         text-align: center;
     }
-
-    /* &:checked:before {
-        content: "test";
-        position: absolute;
-        top: 0;
-    } */
-
-    /* &:checked {
-        content: "S"; código Unicode para o ícone de um carrinho 
-        display: inline-block;
-        margin-right: 10px;
-        font-weight: bold;
-        font-size: 20px;
-    } */
-
-    /* #Sunday:checked + label[for="Sunday"],
-    #Monday:checked + label[for="Monday"],
-    #Tuesday:checked + label[for="Tuesday"],
-    #Wednesday:checked + label[for="Wednesday"],
-    #Thursday:checked + label[for="Thursday"],
-    #Friday:checked + label[for="Friday"],
-    #Saturday:checked + label[for="Saturday"] {
-        background: red;
-        color: aqua;
-    } */
-
-    /* #Sunday:checked,
-    #Monday:checked,
-    #Tuesday:checked,
-    #Wednesday:checked,
-    #Thursday:checked,
-    #Friday:checked,
-    #Saturday:checked{
-        background: #999;
-        color: #ffffff;
-    } */
 `;
 
 const ContainerDaysChoise = styled.div`
@@ -495,6 +606,28 @@ const ContainerDaysChoise = styled.div`
     display: flex;
     margin-left: 19px;
     margin-top: 8px;
+`;
+
+const StandardInputDisabled = styled.input`
+    width: 303px;
+    height: 45px;
+    background: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    margin-left: 19px;
+    margin-right: 18px;
+    margin-top: 18px;
+    color: #B3B3B3;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19.976px;
+    line-height: 25px;    
+    padding-left: 11px;
+    &::placeholder {
+        color: #DBDBDB;
+    }
 `;
 
 const StandardInput = styled.input`
