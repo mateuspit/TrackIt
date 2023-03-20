@@ -309,12 +309,13 @@ export default function HabitsPage() {
             console.log(habitID);
             const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}`, config);
             promise.then((response) => {
-                alert("deletou porra");
+                // alert("deletou porra");
                 console.log(response);
                 console.log(habitsList);
-                // const newHabitsList = habitsList.concat(response.data);
-                // console.log(newHabitsLis/t);
-                // setHabitsList(newHabitsList);
+                // const newArray = oldArray.filter(habit => habit.id !== 57633);
+                const newHabitsList = habitsList.filter(h => h.id !== habitID);
+                console.log(newHabitsList);
+                setHabitsList(newHabitsList);
             });
             promise.catch((response) => {
                 alert(response.response.data.message);
