@@ -12,7 +12,7 @@ export default function HeaderHomeUser() {
             <HeaderPageDesktop />
 
             <DesktopHomePage>
-                TrackIt
+                <Link to={`/`}>TrackIt</Link>
             </DesktopHomePage>
             <DesktopImg src={userData.userImage} alt="User img" />
         </div>
