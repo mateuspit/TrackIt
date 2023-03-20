@@ -44,14 +44,14 @@ export default function HabitsPage() {
         else {
             setNewHabitForm(false);
             setNewHabitFormDisable(false);
-            setNewHabit("");
-            setSundayCheckBox(false);
-            setMondayCheckBox(false);
-            setTuesdayCheckBox(false);
-            setWednesdayCheckBox(false);
-            setThursdayCheckBox(false);
-            setFridayCheckBox(false);
-            setSaturdayCheckBox(false);
+            setNewHabit(newHabit);
+            setSundayCheckBox(sundayCheckBox);
+            setMondayCheckBox(mondayCheckBox);
+            setTuesdayCheckBox(tuesdayCheckBox);
+            setWednesdayCheckBox(wednesdayCheckBox);
+            setThursdayCheckBox(thursdayCheckBox);
+            setFridayCheckBox(fridayCheckBox);
+            setSaturdayCheckBox(saturdayCheckBox);
             setNewHabitFormDisable(false);
         }
 
@@ -114,7 +114,7 @@ export default function HabitsPage() {
             setNewHabitFormDisable(true);
             const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', newHabitSendableObject, config);
             promise.then((response) => {
-                alert("deu o post");
+                // alert("deu o post");
                 console.log(habitsList);
                 console.log(response);
                 const newHabitsList = habitsList.concat(response.data);
@@ -124,9 +124,16 @@ export default function HabitsPage() {
                 setNewHabitFormDisable(false);
                 setNewHabitForm(false);
                 setNewHabit("");
+                setSundayCheckBox(false);
+                setMondayCheckBox(false);
+                setTuesdayCheckBox(false);
+                setWednesdayCheckBox(false);
+                setThursdayCheckBox(false);
+                setFridayCheckBox(false);
+                setSaturdayCheckBox(false);
             });
             promise.catch((response) => {
-                alert("n deu o post");
+                // alert("n deu o post");
                 console.log(response.response.data.message);
             });
         }
@@ -147,49 +154,49 @@ export default function HabitsPage() {
                         <ContainerDaysChoise>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="D" id="Sunday"
-
+                                    checked={sundayCheckBox}
                                     value={sundayCheckBox} onChange={e => setSundayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Sunday" >D</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="S" id="Monday"
-
+                                    checked={mondayCheckBox}
                                     value={mondayCheckBox} onChange={e => setMondayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Monday" >S</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="T" id="Tuesday"
-
+                                    checked={tuesdayCheckBox}
                                     value={tuesdayCheckBox} onChange={e => setTuesdayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Tuesday" >T</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="Q" id="Wednesday"
-
+                                    checked={wednesdayCheckBox}
                                     value={wednesdayCheckBox} onChange={e => setWednesdayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Wednesday" >Q</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="Q" id="Thursday"
-
+                                    checked={thursdayCheckBox}
                                     value={thursdayCheckBox} onChange={e => setThursdayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Thursday" >Q</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="S" id="Friday"
-
+                                    checked={fridayCheckBox}
                                     value={fridayCheckBox} onChange={e => setFridayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Friday" >S</CheckBoxLabel>
                             </CheckBoxContainer>
                             <CheckBoxContainer>
                                 <DayCheckBox letter="S" id="Saturday"
-
+                                    checked={saturdayCheckBox}
                                     value={saturdayCheckBox} onChange={e => setSaturdayCheckBox(e.target.checked)}
                                     type="checkbox" />
                                 <CheckBoxLabel htmlFor="Saturday" >S</CheckBoxLabel>
