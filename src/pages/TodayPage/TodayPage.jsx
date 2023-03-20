@@ -75,8 +75,11 @@ export default function TodayPage() {
         }
         else {
             const numberOfFinishedHabits = habitsList.filter(habit => habit.done).length;
-            const totalHabits = habitsList.lenght;
+            const totalHabits = habitsList.length;
             const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
+            console.log("numberOfFinishedHabits: ",numberOfFinishedHabits);
+            console.log("totalHabits: ",totalHabits);
+            console.log("percentOfFinisehdHabits: ",percentOfFinisehdHabits);
             if (numberOfFinishedHabits === 0) {
                 return (
                     <NoHabitsFinishedPercent>Nenhum hábito concluído ainda</NoHabitsFinishedPercent>
@@ -84,7 +87,7 @@ export default function TodayPage() {
             } else {
                 return (
                     <>
-                        <HabitsFinishedPercent>{percentOfFinisehdHabits} dos hábitos concluídos</HabitsFinishedPercent>
+                        <HabitsFinishedPercent>{percentOfFinisehdHabits.toFixed(0)}% dos hábitos concluídos</HabitsFinishedPercent>
                     </>
                 );
             }
