@@ -12,25 +12,28 @@ import { useEffect, useState } from "react";
 
 
 export default function FooterHabits() {
-    const { userHabits } = useContext(UserContext);
+    const { userPorcent } = useContext(UserContext);
     const [percent, setPercent] = useState(0)
     // const percentage = 20;
     useEffect(() => {
         // if(userHabits.){
 
         // }
-        const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
-        const totalHabits = userHabits.lenght;
-        const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
+        // const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
+        // const totalHabits = userHabits.lenght;
+        // const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
+        // const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
+        // const totalHabits = userHabits.length;
+        // const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
         // console.log(numberOfFinishedHabits);
-        // console.log(percent);
-        if (numberOfFinishedHabits === 0) {
-            setPercent(0);
-        }
-        else {
-            setPercent(percentOfFinisehdHabits);
-        }
-    }, []);
+        // console.log(percentOfFinisehdHabits);
+        // if (userPorcent === 0) {
+        // setPercent(0);
+        // }
+        // else {
+        setPercent(userPorcent);
+        // }
+    }, userPorcent);
     return (
         <>
             <FooterPageDesktop>
@@ -43,7 +46,7 @@ export default function FooterHabits() {
                         <FooterButtons><Link to={`/historico`}>Histórico</Link></FooterButtons>
                         <CircularProgressBar><Link to={`/hoje`}>
                             <CircularProgressbar
-                                value={percent}
+                                value={userPorcent}
                                 text="Hoje"
                                 background
                                 backgroundPadding={6}

@@ -9,7 +9,7 @@ import React from "react";
 
 export default function TodayPage() {
 
-    const { config, userData, setUserHabits } = useContext(UserContext);
+    const { config, setUserPorcent, setUserHabits } = useContext(UserContext);
     const [habitsList, setHabitsList] = React.useState([]);
     const [habitsChecked, setHabitsChecked] = React.useState([]);
 
@@ -77,9 +77,11 @@ export default function TodayPage() {
             const numberOfFinishedHabits = habitsList.filter(habit => habit.done).length;
             const totalHabits = habitsList.length;
             const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
-            console.log("numberOfFinishedHabits: ",numberOfFinishedHabits);
-            console.log("totalHabits: ",totalHabits);
-            console.log("percentOfFinisehdHabits: ",percentOfFinisehdHabits);
+            setUserPorcent(percentOfFinisehdHabits);
+            console.log(percentOfFinisehdHabits);
+            // console.log("numberOfFinishedHabits: ",numberOfFinishedHabits);
+            // console.log("totalHabits: ",totalHabits);
+            // console.log("percentOfFinisehdHabits: ",percentOfFinisehdHabits);
             if (numberOfFinishedHabits === 0) {
                 return (
                     <NoHabitsFinishedPercent>Nenhum hábito concluído ainda</NoHabitsFinishedPercent>
