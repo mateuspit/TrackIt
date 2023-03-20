@@ -26,7 +26,7 @@ export default function SignInPage() {
         const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', signInSendableObject);
         promise.then((response) => {
             setSignInPageDisable(false);
-            console.log(response);
+            // console.log(response);
             navigate('/');
         });
         promise.catch((response) => {
