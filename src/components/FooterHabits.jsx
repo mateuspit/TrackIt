@@ -22,8 +22,8 @@ export default function FooterHabits() {
         const numberOfFinishedHabits = userHabits.filter(habit => habit.done).length;
         const totalHabits = userHabits.lenght;
         const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
-        console.log(numberOfFinishedHabits);
-        console.log(percent);
+        // console.log(numberOfFinishedHabits);
+        // console.log(percent);
         if (numberOfFinishedHabits === 0) {
             setPercent(0);
         }

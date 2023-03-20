@@ -15,9 +15,9 @@ export default function TodayPage() {
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
         promise.then((response) => {
-            console.log(response);
+            // console.log(response);
             const habits = response.data;
-            console.log(habits);
+            // console.log(habits);
             setHabitsList(habits);
             setUserHabits(habits);
         });
@@ -61,8 +61,8 @@ export default function TodayPage() {
     }
 
     function plotPercentFinishedHabits() {
-        console.log(habitsList);
-        console.log(habitsList.length);
+        // console.log(habitsList);
+        // console.log(habitsList.length);
         if (habitsList.length === 0) {
             return (
                 <>
