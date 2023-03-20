@@ -6,9 +6,7 @@ import FooterHabits from "../../components/FooterHabits";
 export default function HabitsPage() {
     return (
         <>
-
             <HeaderHomeUser />
-
 
             <ContainerIphone8>
                 <HabitsHeader>
@@ -18,7 +16,6 @@ export default function HabitsPage() {
 
                 <ContainerNewHabitForm>
                     <StandardInput required placeholder="nome do hábito" />
-
                     <ContainerDaysChoise>
                         <CheckBoxContainer>
                             <DayCheckBox letter="D" id="Sunday" type="checkbox" />
@@ -54,7 +51,6 @@ export default function HabitsPage() {
                         <CancelNewHabitButton type="reset">Cancelar</CancelNewHabitButton>
                         <SaveNewHabitButton type="submit">Salvar</SaveNewHabitButton>
                     </InputsContainerButtons>
-
                 </ContainerNewHabitForm>
 
                 <ContainerHabits>

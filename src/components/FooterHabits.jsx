@@ -1,7 +1,14 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import {
+    CircularProgressbar,
+    CircularProgressbarWithChildren,
+    buildStyles
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 export default function FooterHabits() {
+    const percentage = 20;
     return (
         <>
             <FooterPageDesktop>
@@ -12,7 +19,20 @@ export default function FooterHabits() {
                         <CircularProgressBar>Hoje</CircularProgressBar> */}
                         <FooterButtons><Link to={`/habitos`}>Hábitos</Link></FooterButtons>
                         <FooterButtons><Link to={`/historico`}>Histórico</Link></FooterButtons>
-                        <CircularProgressBar><Link to={`/hoje`}>Hoje</Link></CircularProgressBar>
+                        <CircularProgressBar><Link to={`/hoje`}>
+                            <CircularProgressbar
+                                value={percentage}
+                                text="Hoje"
+                                background
+                                backgroundPadding={6}
+                                styles={buildStyles({
+                                    backgroundColor: "#52B6FF",
+                                    textColor: "#fff",
+                                    pathColor: "#fff",
+                                    trailColor: "transparent"
+                                })}
+                            />
+                        </Link></CircularProgressBar>
                     </HabitsPageFooter>
                 </ContainerIphone8>
             </FooterPageDesktop>
