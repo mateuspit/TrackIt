@@ -301,13 +301,34 @@ export default function HabitsPage() {
         }
     }
 
+    function deleteHabitFunction(habit) {
+        if (window.confirm(`Deseja deletar o habito: ${habit.name}`)) {
+            // alert("deletaaa");
+            console.log(habit);
+            const habitID = habit.id;
+            console.log(habitID);
+            const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}`, config);
+            promise.then((response) => {
+                alert("deletou porra");
+                console.log(response);
+                console.log(habitsList);
+                // const newHabitsList = habitsList.concat(response.data);
+                // console.log(newHabitsLis/t);
+                // setHabitsList(newHabitsList);
+            });
+            promise.catch((response) => {
+                alert(response.response.data.message);
+            });
+        }
+    }
+
     function renderHabitsFunction(habit) {
         return (
             <>
                 <ContainerHabits>
                     <HabitTitle>{habit.name}</HabitTitle>
                     <ContainerDaysChoise>
-                        <TrashDiv><BiTrash size={20} /></TrashDiv>
+                        <TrashDiv onClick={() => deleteHabitFunction(habit)}><BiTrash size={20} /></TrashDiv>
 
                         <CheckBoxContainer>
                             <DayCheckBox disabled checked={habit.days.includes(0)} letter="D" id="Sunday" type="checkbox" />
@@ -382,6 +403,7 @@ const ContainerAllHabits = styled.div`
 `;
 
 const TrashDiv = styled.div`
+    cursor: pointer;
     position: absolute;
     bottom: 45px;
     right: 10px;
@@ -481,6 +503,7 @@ const CancelNewHabitButton = styled.button`
 `;
 
 const CheckBoxLabel = styled.label`
+    cursor: pointer;
     position: absolute;
     top: 1px;
     left: 8px;
@@ -550,6 +573,7 @@ const DayCheckBoxDisabled = styled.input`
 `;
 
 const DayCheckBox = styled.input`
+    cursor: pointer;
     width: 30px;
     height: 30px;
     &[type="checkbox"] {
@@ -670,7 +694,8 @@ const NoHabitsText = styled.div`
     display: flex;
     margin-left: 17px;
     margin-right: 20px;
-    margin-top: 28px;
+    margin-top: -52px;
+    /* margin-bottom: 80px; */
     font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
