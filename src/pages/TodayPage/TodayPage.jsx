@@ -171,14 +171,13 @@ export default function TodayPage() {
             promise.then((response) => {
                 // console.log(response);
                 // alert("clicou post deu certo");
-                const promiseToRender = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
-                promiseToRender.then((response) => {
-                    // console.log(response);
-                    const habits = response.data;
-                    // console.log(habits);
-                    setHabitsList(habits);
-                    setUserHabits(habits);
+                const newHabitsList = habitsList.map((h) => {
+                    if (h.id === habits.id) {
+                        return { ...h, done: false };
+                    }
+                    return h;
                 });
+                setHabitsList(newHabitsList);
             });
             promise.catch((response) => {
                 // alert("n clicou");
