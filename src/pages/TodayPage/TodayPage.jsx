@@ -11,14 +11,11 @@ export default function TodayPage() {
 
     const { config, setUserPorcent, setUserHabits } = useContext(UserContext);
     const [habitsList, setHabitsList] = React.useState([]);
-    const [habitsChecked, setHabitsChecked] = React.useState([]);
 
     useEffect(() => {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
         promise.then((response) => {
-            // console.log(response);
             const habits = response.data;
-            // console.log(habits);
             setHabitsList(habits);
             setUserHabits(habits);
         });
@@ -30,7 +27,6 @@ export default function TodayPage() {
     function plotTodayDate() {
         const todayDate = new Date();
         let weekDay = "";
-        // console.log(todayDate.getDay())
         switch (todayDate.getDay()) {
             case 0:
                 weekDay = "Domingo";
@@ -62,8 +58,6 @@ export default function TodayPage() {
     }
 
     function plotPercentFinishedHabits() {
-        // console.log(habitsList);
-        // console.log(habitsList.length);
         if (habitsList.length === 0) {
             return (
                 <>
@@ -78,10 +72,6 @@ export default function TodayPage() {
             const totalHabits = habitsList.length;
             const percentOfFinisehdHabits = (numberOfFinishedHabits * 100) / totalHabits;
             setUserPorcent(percentOfFinisehdHabits);
-            // console.log(percentOfFinisehdHabits);
-            // console.log("numberOfFinishedHabits: ",numberOfFinishedHabits);
-            // console.log("totalHabits: ",totalHabits);
-            // console.log("percentOfFinisehdHabits: ",percentOfFinisehdHabits);
             if (numberOfFinishedHabits === 0) {
                 return (
                     <NoHabitsFinishedPercent data-test="today-counter">Nenhum hábito concluído ainda</NoHabitsFinishedPercent>
@@ -133,24 +123,9 @@ export default function TodayPage() {
 
     function markAndDesmarkFunction(e, habits) {
         if (e.target.checked) {
-            // alert("clicou");
-            // console.log(habits);
             const habitID = habits.id;
-            // console.log(habitID);
-            // console.log(config);
             const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}/check`, {}, config);
-            promise.then((response) => {
-                // console.log(response);
-                // alert("clicou post deu certo");
-                // const promiseToRender = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
-                // promiseToRender.then((response) => {
-                //     // console.log(response);
-                //     const habits = response.data;
-                //     // console.log(habits);
-                //     setHabitsList(habits);
-                //     setUserHabits(habits);
-                // });
-                // console.log(habits)
+            promise.then(() => {
                 const newHabitsList = habitsList.map((h) => {
                     if (h.id === habits.id) {
                         return { ...h, done: true };
@@ -160,17 +135,13 @@ export default function TodayPage() {
                 setHabitsList(newHabitsList);
             });
             promise.catch((response) => {
-                // alert("n clicou");
                 alert(response.response.data.message);
             });
         }
         else {
-            // alert("desclicou");
             const habitID = habits.id;
             const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}/uncheck`, {}, config);
             promise.then((response) => {
-                // console.log(response);
-                // alert("clicou post deu certo");
                 const newHabitsList = habitsList.map((h) => {
                     if (h.id === habits.id) {
                         return { ...h, done: false };
@@ -180,7 +151,6 @@ export default function TodayPage() {
                 setHabitsList(newHabitsList);
             });
             promise.catch((response) => {
-                // alert("n clicou");
                 alert(response.response.data.message);
             });
         }
@@ -188,27 +158,23 @@ export default function TodayPage() {
 
     function plotHabits() {
         if (habitsList.length !== 0) {
-            // console.log(habitsList);
             return (
                 <div>
                     {habitsList.map((habits) =>
-                        <>
-                            <ContainerHabitsStats data-test="today-habit-container">
-                                <HabitTitle data-test="today-habit-name">{habits.name}</HabitTitle>
-                                <ContainerTodayStats data-test="today-habit-sequence">
-                                    <SequenceAndRecordTitle >Sequência atual:&nbsp;</SequenceAndRecordTitle>
-                                    {daySequence(habits.currentSequence, habits.done)}
-                                    {/* <MakeTodayOrBrokeRecord>{" "}3 dias</MakeTodayOrBrokeRecord> */}
-                                </ContainerTodayStats>
-                                <ContainerTodayStats data-test="today-habit-record">
-                                    <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
-                                    {recordSequence(habits.highestSequence, habits.currentSequence, habits.done)}
-                                    {/* <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord> */}
-                                </ContainerTodayStats>
-                                {/* <BigDailyCheck value={} onClick={markAndDesmarkFunction} type="checkbox" /> */}
-                                <BigDailyCheck data-test="today-habit-check-btn" checked={habits.done} onClick={(e) => markAndDesmarkFunction(e, habits)} type="checkbox" />
-                            </ContainerHabitsStats>
-                        </>
+
+                        <ContainerHabitsStats key={habits.id} data-test="today-habit-container">
+                            <HabitTitle data-test="today-habit-name">{habits.name}</HabitTitle>
+                            <ContainerTodayStats data-test="today-habit-sequence">
+                                <SequenceAndRecordTitle >Sequência atual:&nbsp;</SequenceAndRecordTitle>
+                                {daySequence(habits.currentSequence, habits.done)}
+                            </ContainerTodayStats>
+                            <ContainerTodayStats data-test="today-habit-record">
+                                <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
+                                {recordSequence(habits.highestSequence, habits.currentSequence, habits.done)}
+                            </ContainerTodayStats>
+                            <BigDailyCheck data-test="today-habit-check-btn" checked={habits.done} onChange={() => { }} onClick={(e) => markAndDesmarkFunction(e, habits)} type="checkbox" />
+                        </ContainerHabitsStats>
+
                     )}
                 </div>
             );
@@ -219,23 +185,12 @@ export default function TodayPage() {
         <>
             <HeaderHomeUser />
             <ContainerIphone8>
+
                 {plotTodayDate()}
-                {/* <DayStats>Segunda, 17/05</DayStats> */}
+
                 {plotPercentFinishedHabits()}
-                {/* <HabitsFinishedPercent>67% dos hábitos concluídos</HabitsFinishedPercent> */}
+
                 {plotHabits()}
-                {/* <ContainerHabitsStats>
-                    <HabitTitle>Ler 1 capitulo de livro</HabitTitle>
-                    <ContainerTodayStats>
-                        <SequenceAndRecordTitle>Sequência atual:&nbsp;</SequenceAndRecordTitle>
-                        <MakeTodayOrBrokeRecord>{" "}3 dias</MakeTodayOrBrokeRecord>
-                    </ContainerTodayStats>
-                    <ContainerTodayStats>
-                        <SequenceAndRecordTitle>Seu recorde:&nbsp;</SequenceAndRecordTitle>
-                        <NotMakeTodayOrNotBrokeRecord>5 dias</NotMakeTodayOrNotBrokeRecord>
-                    </ContainerTodayStats>
-                    <BigDailyCheck type="checkbox" />
-                </ContainerHabitsStats> */}
 
             </ContainerIphone8>
             <FooterHabits />
@@ -248,12 +203,9 @@ const BigDailyCheck = styled.input`
     top: 13px;
     right: 13px;
     &[type="checkbox"] {
-    /* Add if not using autoprefixer */
     -webkit-appearance: none;
     appearance: none;
-    /* For iOS < 15 to remove gradient background */
     background-color: #fff;
-    /* Not removed via appearance */
     margin: 0;
     font: inherit;
     color: white;
@@ -271,8 +223,7 @@ const BigDailyCheck = styled.input`
         align-items: center;
         width: 69px;
         height: 69px;
-        /* background-color: red; */
-    }
+        }
     &[type="checkbox"]:checked {
         content: "✔";
         font-size: 50px;
@@ -368,7 +319,6 @@ const DayStats = styled.h1`
     font-size: 22.976px;
     line-height: 29px;
     color: #126BA5;
-    /* background-color: rebeccapurple; */
     width: 100%;
     margin-top: 28px;
     padding-left: 17px;
@@ -378,10 +328,6 @@ const ContainerIphone8 = styled.div`
     width: 375px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* background-color: #E5E5E5; */
     margin: auto;
-    /* margin-top: 68px; */
     margin-bottom: 80px;
 `;
