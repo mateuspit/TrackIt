@@ -212,7 +212,7 @@ export default function HabitsPage() {
                         </ContainerDaysChoise>
 
                         <InputsContainerButtons>
-                            <CancelNewHabitButton data-test="habit-create-cancel" type="reset">Cancelar</CancelNewHabitButton>
+                            <CancelNewHabitButton onClick={openNewHabitFormFunction} data-test="habit-create-cancel" type="reset">Cancelar</CancelNewHabitButton>
                             <SaveNewHabitButton data-test="habit-create-save-btn" type="submit">Salvar</SaveNewHabitButton>
                         </InputsContainerButtons>
                     </ContainerNewHabitForm>
