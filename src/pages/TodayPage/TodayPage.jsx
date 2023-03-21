@@ -90,7 +90,7 @@ export default function TodayPage() {
         if (done) {
             return (
                 <>
-                    <MakeTodayOrBrokeRecord>{currentSequence}</MakeTodayOrBrokeRecord>
+                    <MakeTodayOrBrokeRecord>{currentSequence + 1}</MakeTodayOrBrokeRecord>
                 </>
             );
         }
@@ -107,7 +107,7 @@ export default function TodayPage() {
         if (done && (currentSequence === recordSequence)) {
             return (
                 <>
-                    <MakeTodayOrBrokeRecord>{currentSequence}</MakeTodayOrBrokeRecord>
+                    <MakeTodayOrBrokeRecord>{currentSequence + 1}</MakeTodayOrBrokeRecord>
                 </>
             );
         }
