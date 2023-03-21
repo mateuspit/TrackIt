@@ -105,22 +105,22 @@ export default function HabitsPage() {
             if (saturdayCheckBox) {
                 days.push(6);
             }
-            console.log(days);
+            // console.log(days);
             const newHabitSendableObject = {
                 name: newHabit,
                 days: days
             };
-            console.log(newHabitSendableObject);
+            // console.log(newHabitSendableObject);
             setNewHabitFormDisable(true);
             const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', newHabitSendableObject, config);
             promise.then((response) => {
                 // alert("deu o post");
-                console.log(habitsList);
-                console.log(response);
+                // console.log(habitsList);
+                // console.log(response);
                 const newHabitsList = habitsList.concat(response.data);
-                console.log(newHabitsList);
+                // console.log(newHabitsList);
                 setHabitsList(newHabitsList);
-                console.log(response);
+                // console.log(response);
                 setNewHabitFormDisable(false);
                 setNewHabitForm(false);
                 setNewHabit("");
@@ -327,17 +327,17 @@ export default function HabitsPage() {
     function deleteHabitFunction(habit) {
         if (window.confirm(`Deseja deletar o habito: ${habit.name}`)) {
             // alert("deletaaa");
-            console.log(habit);
+            // console.log(habit);
             const habitID = habit.id;
-            console.log(habitID);
+            // console.log(habitID);
             const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitID}`, config);
-            promise.then((response) => {
+            promise.then(() => {
                 // alert("deletou porra");
-                console.log(response);
-                console.log(habitsList);
+                // console.log(response);
+                // console.log(habitsList);
                 // const newArray = oldArray.filter(habit => habit.id !== 57633);
                 const newHabitsList = habitsList.filter(h => h.id !== habitID);
-                console.log(newHabitsList);
+                // console.log(newHabitsList);
                 setHabitsList(newHabitsList);
             });
             promise.catch((response) => {
